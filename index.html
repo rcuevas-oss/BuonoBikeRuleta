@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buono Bike - Ruleta de Premios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    <main class="container">
+        <header>
+            <h1 class="logo">BUONO <span>BIKE</span></h1>
+            <p class="subtitle">¡Gira la ruleta y gana premios exclusivos Specialized!</p>
+        </header>
+
+        <section class="wheel-section">
+            <div class="wheel-container">
+                <div class="needle"></div>
+                <canvas id="wheel" width="500" height="500"></canvas>
+            </div>
+            <button id="spin-btn">GIRAR RULETA</button>
+        </section>
+
+        <!-- Lead Form Modal -->
+        <div id="lead-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>¡FELICIDADES!</h2>
+                <p id="prize-text">Has ganado: <span>Retiro Gratis para Mantención</span></p>
+                <p class="instruction">Ingresa tus datos para recibir tu código de beneficio.</p>
+                <form id="lead-form">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Correo electrónico" required>
+                    </div>
+                    <button type="submit" id="submit-btn">OBTENER MI CÓDIGO</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="success-modal" class="modal hidden">
+            <div class="modal-content success">
+                <div class="icon">🚲</div>
+                <h2>¡CÓDIGO GENERADO!</h2>
+                <div class="coupon-code" id="coupon-display">RG-000</div>
+                <p>Presenta este código en nuestra tienda para validar tu premio.</p>
+                <button onclick="location.reload()">VOLVER</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
