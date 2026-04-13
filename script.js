@@ -102,11 +102,14 @@ leadForm.addEventListener('submit', async (e) => {
     const email = document.getElementById('email').value;
     const code = `RG-${Math.floor(Math.random() * 900) + 100}`;
 
+    const source = sessionStorage.getItem('ref_source') || "directo";
+
     const data = {
         name: name,
         email: email,
         codigo: code,
-        premio: "Retiro Gratis para Mantención"
+        premio: "Retiro Gratis para Mantención",
+        source: source
     };
 
     try {
@@ -134,8 +137,15 @@ leadForm.addEventListener('submit', async (e) => {
     }
 });
 
-// Check if already participated
+// Check if already participated and capture UTM/Ref
 window.addEventListener('load', () => {
+    // Capture tracking parameter from ManyChat (?ref=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get('ref');
+    if (ref) {
+        sessionStorage.setItem('ref_source', ref);
+    }
+
     if (localStorage.getItem('buono_bike_completed')) {
         spinBtn.disabled = true;
         spinBtn.innerText = "YA PARTICIPASTE";
