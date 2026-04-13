@@ -9,10 +9,10 @@ const couponDisplay = document.getElementById('coupon-display');
 const DB_URL = "https://hull-talks-persons-additions.trycloudflare.com";
 
 const prizes = [
-    { label: "Bombín Specialized", color: "#222" },
-    { label: "Luz Delantera", color: "#333" },
-    { label: "Guantes Specialized", color: "#222" },
-    { label: "Experiencia E-Bike", color: "#333" },
+    { label: "Bombín Specialized", color: "#1a1a1a" },
+    { label: "Luz Delantera", color: "#222" },
+    { label: "Guantes Specialized", color: "#1a1a1a" },
+    { label: "Experiencia E-Bike", color: "#222" },
     { label: "Retiro Gratis para Mantención", color: "#E31B23" } // WINNER (Index 4)
 ];
 
@@ -62,18 +62,22 @@ function spin() {
     const extraSpins = 5 + Math.random() * 5;
     const targetPrizeIndex = 4;
     
-    // Calculate rotation to land on index 4
-    // Each segment is 72 degrees.
-    // Index 4 is from 288 to 360 degrees in the array, but the wheel rotates.
-    // The visual result = (270 - totalRotation) % 360
-    
+    // Calculate rotation to land EXACTLY on the middle of index 4 (Rojo)
     const segmentDeg = 360 / numSegments;
-    const targetDeg = 360 - (targetPrizeIndex * segmentDeg + segmentDeg / 2);
+    const centerOfWinner = 324; // Center of index 4 (288 + 36)
+    const pointerPos = 270; // Position of the top needle
     
-    const totalRotation = (extraSpins * 360) + targetDeg;
+    // Logic: (pointerPos - totalRotation) % 360 must be centerOfWinner
+    // So targetDeg = pointerPos - centerOfWinner (adjusted for positive result)
+    const targetDeg = (pointerPos - centerOfWinner + 360) % 360;
+    
+    const totalRotation = (Math.floor(extraSpins) * 360) + targetDeg;
     
     canvas.style.transition = 'transform 5s cubic-bezier(0.15, 0, 0.15, 1)';
     canvas.style.transform = `rotate(${totalRotation}deg)`;
+    
+    // Save state
+    localStorage.setItem('buono_bike_spin', "true");
 
     setTimeout(() => {
         leadModal.classList.remove('hidden');
@@ -105,6 +109,7 @@ leadForm.addEventListener('submit', async (e) => {
         });
 
         if (response.ok) {
+            localStorage.setItem('buono_bike_completed', "true");
             couponDisplay.innerText = code;
             leadModal.classList.add('hidden');
             successModal.classList.remove('hidden');
@@ -118,6 +123,14 @@ leadForm.addEventListener('submit', async (e) => {
         alert("Error de conexión.");
         submitBtn.innerText = "OBTENER MI CÓDIGO";
         submitBtn.disabled = false;
+    }
+});
+
+// Check if already participated
+window.addEventListener('load', () => {
+    if (localStorage.getItem('buono_bike_completed')) {
+        spinBtn.disabled = true;
+        spinBtn.innerText = "YA PARTICIPASTE";
     }
 });
 

@@ -224,6 +224,13 @@ input:focus {
     border-radius: 10px;
 }
 
+.won-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1rem 0;
+}
+
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
