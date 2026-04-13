@@ -75,7 +75,7 @@ header {
     width: 500px;
     height: 500px;
     margin-bottom: 2rem;
-    filter: drop-shadow(0 0 30px rgba(227, 27, 35, 0.3));
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
 }
 
 .needle {
@@ -85,7 +85,7 @@ header {
     transform: translateX(-50%);
     width: 40px;
     height: 60px;
-    background: var(--primary);
+    background: #fff;
     clip-path: polygon(50% 100%, 0 0, 100% 0);
     z-index: 10;
     filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));

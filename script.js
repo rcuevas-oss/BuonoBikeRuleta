@@ -9,11 +9,11 @@ const couponDisplay = document.getElementById('coupon-display');
 const DB_URL = "https://hull-talks-persons-additions.trycloudflare.com";
 
 const prizes = [
-    { label: "Bombín Specialized", color: "#1a1a1a" },
-    { label: "Luz Delantera", color: "#222" },
-    { label: "Guantes Specialized", color: "#1a1a1a" },
-    { label: "Experiencia E-Bike", color: "#222" },
-    { label: "Retiro Gratis para Mantención", color: "#E31B23" } // WINNER (Index 4)
+    { label: "Bombín Specialized", color: "#111111" },
+    { label: "Luz Delantera", color: "#222222" },
+    { label: "Guantes Specialized", color: "#333333" },
+    { label: "Experiencia E-Bike", color: "#444444" },
+    { label: "Retiro Gratis para Mantención", color: "#1a1a1a" } // Winner (Now camouflaged)
 ];
 
 let currentRotation = 0;
@@ -80,6 +80,14 @@ function spin() {
     localStorage.setItem('buono_bike_spin', "true");
 
     setTimeout(() => {
+        // Trigger Confetti!
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#E31B23', '#ffffff', '#000000']
+        });
+        
         leadModal.classList.remove('hidden');
     }, 5500);
 }
