@@ -103,13 +103,15 @@ leadForm.addEventListener('submit', async (e) => {
     const code = `RG-${Math.floor(Math.random() * 900) + 100}`;
 
     const source = sessionStorage.getItem('ref_source') || "directo";
+    const fecha = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' });
 
     const data = {
         name: name,
         email: email,
         codigo: code,
         premio: "Retiro Gratis para Mantención",
-        source: source
+        source: source,
+        fecha: fecha
     };
 
     try {
